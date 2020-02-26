@@ -1,0 +1,8 @@
+{
+ "customer": "Milk and Wool Trading Ltd",
+ "order": 
+ {
+ "milk": 0,
+ "wool": 7
+ }
+ }

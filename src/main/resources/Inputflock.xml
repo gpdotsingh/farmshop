@@ -1,0 +1,32 @@
+<flocks>
+    <flock>
+        <type>sheep</type>
+        <name>Robert</name>
+        <sex>m</sex>
+        <wool>34</wool>
+    </flock>
+    <flock>
+        <type>sheep</type>
+        <name>Betty</name>
+        <sex>f</sex>
+        <wool>28</wool>
+    </flock>
+    <flock>
+        <type>lamb</type>
+        <name>Teemo</name>
+        <sex>m</sex>
+        <wool>5</wool>
+    </flock>
+    <flock>
+        <type>goat</type>
+        <name>Alice</name>
+        <sex>f</sex>
+        <wool>0</wool>
+    </flock>
+    <flock>
+        <type>goat</type>
+        <name>Stanislas</name>
+        <sex>m</sex>
+        <wool>0</wool>
+    </flock>
+</flocks>

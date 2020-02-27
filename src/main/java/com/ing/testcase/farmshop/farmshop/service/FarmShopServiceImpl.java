@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.ing.testcase.farmshop.farmshop.FarmshopApplication;
 import com.ing.testcase.farmshop.farmshop.common.AppConfig;
+import com.ing.testcase.farmshop.farmshop.common.OutOfStockException;
 import com.ing.testcase.farmshop.farmshop.entities.Customer;
 import com.ing.testcase.farmshop.farmshop.entities.Flocks;
 import com.ing.testcase.farmshop.farmshop.entities.Stock;
@@ -60,7 +61,7 @@ public class FarmShopServiceImpl implements FarmShopService {
         if (milkPlaced > stock.getMilk() || woolPlaced > stock.getWools()) {
             customer.setOrder(null);
             customer.setOrderDescription("Out Of Stock");
-            throw new  OutOfStockException( stock.getMilk(), stock.getWools());
+            throw new OutOfStockException( stock.getMilk(), stock.getWools());
 //            return true;
         }
         stock.setMilk(stock.getMilk() - milkPlaced);

@@ -1,4 +1,4 @@
-package com.ing.testcase.farmshop.farmshop.exceptions;
+package com.ing.testcase.farmshop.farmshop.common;
 
 public class OutOfStockException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package com.ing.testcase.farmshop.farmshop.exceptions;
+package com.ing.testcase.farmshop.farmshop.common;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;

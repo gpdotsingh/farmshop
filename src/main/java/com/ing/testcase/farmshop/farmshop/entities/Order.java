@@ -2,6 +2,7 @@ package com.ing.testcase.farmshop.farmshop.entities;
 
 import lombok.Data;
 
+
 @Data
 public class Order {
 

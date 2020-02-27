@@ -24,20 +24,34 @@ public class FarmShopServiceImpl implements FarmShopService {
 
     @Autowired
     AppConfig appConfig;
+    @Autowired
+    Flocks flocks;
+    @Autowired
+    Stock stock;
+    @Autowired
+    Stockexist stockexist;
 
+    /****
+     *
+     * @return
+     * @throws JsonProcessingException
+     * @throws JsonMappingException
+     * @throws IOException
+     */
     public Flocks extracted() throws JsonProcessingException, JsonMappingException, IOException {
         ObjectMapper objectMapper = new XmlMapper();
         ClassLoader classLoader = new FarmshopApplication().getClass().getClassLoader();
         File fXmlFile = new File(classLoader.getResource(appConfig.getFileName()).getFile());
         // Reads from XML and converts to POJO
-        Flocks flocks = objectMapper.readValue(fXmlFile,Flocks.class);
-        return flocks;
+        return objectMapper.readValue(fXmlFile,Flocks.class);
     }
 
-    public Stockexist getStock(Stock stock, Stockexist stockexist) throws IOException {
+    /***
+     *
+     */
+    public void getStock()  {
         if (!stockexist.isStockExist())
         {
-            Flocks flocks = extracted();
             stockexist.setStockExist(true);
             flocks.getFlock().stream().map(flock -> {
                 if (flock.getWool() != 0)
@@ -50,22 +64,31 @@ public class FarmShopServiceImpl implements FarmShopService {
                         stock.setMilk(stock.getMilk() + 50);
                     }
                 }
-                return flocks;
+                return stock;
             }).collect(Collectors.toList());
         }
-        return stockexist;
     }
 
-    public boolean stockUpdate_Customer(Customer customer, Integer milkPlaced, Integer woolPlaced, Stock stock, List<Customer>  orderlist) {
+    /***
+     *
+     * @param customer
+     * @param orderlist
+     * @return
+     * @throws OutOfStockException
+     */
+    public boolean stockUpdate_Customer(Customer customer, List<Customer>  orderlist) throws OutOfStockException{
         orderlist.add(customer);
-        if (milkPlaced > stock.getMilk() || woolPlaced > stock.getWools()) {
+        int milkPlaced = customer.getOrder().getMilk();
+        int woolPlaced =  customer.getOrder().getWool();
+        if ( milkPlaced > stock.getMilk() || woolPlaced > stock.getWools()) {
             customer.setOrder(null);
             customer.setOrderDescription("Out Of Stock");
             throw new OutOfStockException( stock.getMilk(), stock.getWools());
-//            return true;
         }
         stock.setMilk(stock.getMilk() - milkPlaced);
         stock.setWools(stock.getWools() - woolPlaced);
         return false;
     }
+
+
 }

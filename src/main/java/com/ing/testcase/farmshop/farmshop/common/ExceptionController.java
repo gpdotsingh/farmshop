@@ -1,5 +1,7 @@
 package com.ing.testcase.farmshop.farmshop.common;
 
+import com.ing.testcase.farmshop.farmshop.entities.Stockexist;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import java.util.Map;
 
 @ControllerAdvice
 public class ExceptionController extends ResponseEntityExceptionHandler {
+    @Autowired
+    Stockexist stockexist;
 
     @ExceptionHandler(HttpServerErrorException.class)
     public HttpEntity handleGlobalException(HttpServerErrorException e) {
@@ -27,6 +31,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("Time: ", LocalDateTime.now());
         body.put("Out Of Stock Message: ", ex.getLocalizedMessage());
+        stockexist.setStockExist(false);
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 }

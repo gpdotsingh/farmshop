@@ -15,16 +15,32 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static org.springframework.http.HttpStatus.*;
+
 @ControllerAdvice
 public class ExceptionController extends ResponseEntityExceptionHandler {
     @Autowired
     Stockexist stockexist;
 
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<Object> handleNullException(HttpServerErrorException e) {
+        return new ResponseEntity<>("Please correct your input",EXPECTATION_FAILED);
+    }
+
     @ExceptionHandler(HttpServerErrorException.class)
     public HttpEntity handleGlobalException(HttpServerErrorException e) {
         return new ResponseEntity(e.getStatusCode());
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public HttpEntity handleBadRequest() {
+        return new ResponseEntity(BAD_REQUEST);
+    }
 
+    @ExceptionHandler(Throwable.class)
+    public HttpEntity handleGlobalException(Throwable t) {
+        return new ResponseEntity(SERVICE_UNAVAILABLE);
+    }
     @ExceptionHandler(OutOfStockException.class)
     public ResponseEntity<Object> handleOutOfStockException(
             OutOfStockException ex, WebRequest request) {

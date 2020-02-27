@@ -76,7 +76,7 @@ public class FarmShopServiceImpl implements FarmShopService {
      * @return
      * @throws OutOfStockException
      */
-    public boolean stockUpdate_Customer(Customer customer, List<Customer>  orderlist) throws OutOfStockException{
+    public boolean stockUpdate_Customer(Customer customer, List<Customer>  orderlist) throws OutOfStockException,NullPointerException{
         orderlist.add(customer);
         int milkPlaced = customer.getOrder().getMilk();
         int woolPlaced =  customer.getOrder().getWool();

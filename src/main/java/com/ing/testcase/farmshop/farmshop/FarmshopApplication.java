@@ -1,7 +1,5 @@
 package com.ing.testcase.farmshop.farmshop;
 
-import com.ing.testcase.farmshop.farmshop.entities.Flocks;
-import com.ing.testcase.farmshop.farmshop.util.CommonUtills;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -38,8 +36,6 @@ public class FarmshopApplication {
 		System.out.println(document.getDocumentElement().getNextSibling());
 		System.out.println(root.getNodeName());
 
-		CommonUtills commonUtills = new CommonUtills();
-		Flocks flocks=commonUtills.extracted();
 		SpringApplication.run(FarmshopApplication.class, args);
 	}
 

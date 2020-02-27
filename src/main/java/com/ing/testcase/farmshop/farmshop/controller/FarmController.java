@@ -64,7 +64,7 @@ public class FarmController {
      * @throws IOException
      */
     @GetMapping( Constants.STOCK_END_POINT)
-    public ResponseEntity<Stock> stock()  {
+    public ResponseEntity<Stock> stock()  throws Exception{
         return new ResponseEntity<Stock>(stock, HttpStatus.OK);
     }
 
@@ -77,7 +77,7 @@ public class FarmController {
      * @throws IOException
      */
     @PostMapping(Constants.ORDER_END_POINT)
-    public ResponseEntity<Customer> order(@RequestBody Customer customer) throws JsonMappingException, JsonProcessingException, IOException {
+    public ResponseEntity<Customer> order(@RequestBody Customer customer) throws NullPointerException,JsonMappingException, JsonProcessingException, Exception {
 
         farmshopService.stockUpdate_Customer(customer,orderlist);
         customer.setOrderDescription("Your order placed successfully for  Milk :: " + customer.getOrder().getMilk() + " & for Wool ::  " + customer.getOrder().getWool());
@@ -92,7 +92,7 @@ public class FarmController {
      * @throws IOException
      */
     @GetMapping( Constants.ORDER_END_POINT)
-    public ResponseEntity<List<Customer>> fetchOrder() throws JsonMappingException, JsonProcessingException, IOException {
+    public ResponseEntity<List<Customer>> fetchOrder() throws Exception {
         return new ResponseEntity<List<Customer>>(orderlist, HttpStatus.OK);
     }
 

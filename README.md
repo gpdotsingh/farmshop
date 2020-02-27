@@ -1,4 +1,4 @@
-Download project from git by url https://github.com/gpdotsingh/tmClient.git 	
+Download project from git by url https://github.com/gpdotsingh/farmshop.git 	
 
 =================================================================================================
 
@@ -15,79 +15,42 @@ Clone this repo and start application by
 # Run
 
     mvn spring-boot:run
-	
-=================================================================================================	
-Note:=>	Only start Client and tm server application using the command. If the maven is not installed
-then you can run application also by java -jar jarname.
-Angular files are converted into static files and same is present in client code.
-=================================================================================================
 
-Project run on port 8081 , 8080  and 9001 
+=================================================================================================
+	
+Project run on port  8080  
 
 =================================================================================================
 
 
-Hit URL 
+URL used 
 
-http://localhost:8081/ after starting all the server 
+#####As a farmer, If you want to see an overview of your flock, with a JSON representation, using a HTTP REST service.
+        http://localhost:8080/farmshop/flock
+        Project is reading the input data from resources that is inputflock.xml, which is being used as stock accumulated by 
+        farmer.
 
-Two tabs will appear Transaction Management and Request Monitoring
 
-	Transaction Management tab functionality
-	==============================
-	
-	Enter start date by which you want to see the transaction
-	Enter end date till which you want to see the transaction
-	
-	On click of key inside origin an backend call from front end to tm client which will go to fetch matched names.
-	
-	FE will invoke URL below pattern to fetch distinct name to client server
-	 http://localhost:8081/client/name?name={characters} which internally call server
-	 
-	 http://localhost:8080/api/name?name={characters}
-	
-	Select desired name
-	
-	Click search file button and internally it call from FE
-	    http://localhost:8081/api/tm?startDate={startDate}&endtDate={endtDate}&name={name} 
-	
-	From Client it will call Server 
-	
-		http://localhost:8080/api/tm?startDate={startDate}&endtDate={endtDate}&name={name} 
-
-	
-	Server will bind result and return details which will contain 
-	
-	id
-	email
-    name
-    transactioId
-    transactionTime
-    verifiedUser
-	
-	Request Monitoring functionality
-	=================================
-	
-	It will go to http://localhost:8081/api/actuator/getHealthMetrics
-	
-	It contains Request Statistics
-		which include of
-			maxTime : Maximum time took by any request
-			minTime : Minimum time took by any request
-			totalCount : Total number of request
-			statusOKCount : Number of sucessfull request
-			status4XXCount : Number of request with status like 4
-			status5XXCount : Number of request with status like 5
-			
-			
-		and Request Status Code with its count.
-		
-	 npm install --save-dev @angular-devkit/build-angular	
-	 
-	 
-## Functionality.
-
-    Client is communicating with tmServer and for communicating securly they are using Oauth
-    client credential authorization type.
+#####As a farmer and client of the webshop, If you want to see what stock of milk and wool is available.
+        http://localhost:8080/farmshop/stock
+        As a farmer if you want to see the stock you can hit the above URL, it will display te leftout stock
     
-    Server contain the in memory database 	 
+#####As a client of the webshop, If you want to be able to order milk or/and wool.    
+        http://localhost:8080/farmshop/order
+        As a client to place order send a post request to above URL with your orders in below format    
+        
+        {
+        "customer": "Milk and Wool Trading Ltd",
+        "order": {
+        "milk": 90,
+        "wool": 3
+        }
+        }
+    
+#####As a farmer, I'd like to see history of (fulfilled) orders    
+        http://localhost:8080/farmshop/order
+        To see the order history as client please use above URL
+
+#####As a farmer if stock is completed and you want to refill the 
+        http://localhost:8080/farmshop/stock 
+        If stock is finished and you have a new stock and want to add to the left stock please post the above URL

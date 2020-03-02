@@ -1,4 +1,4 @@
-package com.ing.testcase.farmshop.farmshop;
+package com.ing.testcase.farmshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

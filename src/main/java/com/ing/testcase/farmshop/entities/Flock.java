@@ -1,4 +1,4 @@
-package com.ing.testcase.farmshop.farmshop.entities;
+package com.ing.testcase.farmshop.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;

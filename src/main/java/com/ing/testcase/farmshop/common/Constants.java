@@ -1,4 +1,4 @@
-package com.ing.testcase.farmshop.farmshop.common;
+package com.ing.testcase.farmshop.common;
 
 public interface Constants {
 

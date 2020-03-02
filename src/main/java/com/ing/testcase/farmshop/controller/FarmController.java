@@ -1,11 +1,12 @@
-package com.ing.testcase.farmshop.farmshop.controller;
+package com.ing.testcase.farmshop.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.ing.testcase.farmshop.farmshop.common.Constants;
-import com.ing.testcase.farmshop.farmshop.common.OutOfStockException;
-import com.ing.testcase.farmshop.farmshop.entities.*;
-import com.ing.testcase.farmshop.farmshop.service.FarmShopService;
+import com.ing.testcase.farmshop.common.Constants;
+import com.ing.testcase.farmshop.entities.Customer;
+import com.ing.testcase.farmshop.entities.Flocks;
+import com.ing.testcase.farmshop.entities.Stock;
+import com.ing.testcase.farmshop.service.FarmShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -77,7 +78,7 @@ public class FarmController {
      * @throws IOException
      */
     @PostMapping(Constants.ORDER_END_POINT)
-    public ResponseEntity<Customer> order(@RequestBody Customer customer) throws NullPointerException, Exception {
+    public ResponseEntity<Customer> order(@RequestBody Customer customer)  {
 
         farmshopService.stockUpdate_Customer(customer,orderlist);
         customer.setOrderDescription("Your order placed successfully for  Milk :: " + customer.getOrder().getMilk() + " & for Wool ::  " + customer.getOrder().getWool());

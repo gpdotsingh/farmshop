@@ -1,4 +1,4 @@
-package com.ing.testcase.farmshop.farmshop.entities;
+package com.ing.testcase.farmshop.entities;
 
 import lombok.Data;
 import org.springframework.stereotype.Service;

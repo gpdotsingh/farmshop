@@ -1,6 +1,6 @@
-package com.ing.testcase.farmshop.farmshop.common;
+package com.ing.testcase.farmshop.common;
 
-import com.ing.testcase.farmshop.farmshop.entities.Stockexist;
+import com.ing.testcase.farmshop.entities.Stockexist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -41,6 +41,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     public HttpEntity handleGlobalException(Throwable t) {
         return new ResponseEntity(SERVICE_UNAVAILABLE);
     }
+
     @ExceptionHandler(OutOfStockException.class)
     public ResponseEntity<Object> handleOutOfStockException(
             OutOfStockException ex, WebRequest request) {
@@ -50,4 +51,14 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
         stockexist.setStockExist(false);
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(CheckInputtypeException.class)
+    public ResponseEntity<Object> handleCheckInputtypeException(
+            CheckInputtypeException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("Time: ", LocalDateTime.now());
+        body.put("Body format: ", "Verify your input parameters");
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
 }

@@ -1,11 +1,10 @@
-package com.ing.testcase.farmshop.farmshop;
+package com.ing.testcase.farmshop;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.ing.testcase.farmshop.farmshop.common.Constants;
-import com.ing.testcase.farmshop.farmshop.common.OutOfStockException;
-import com.ing.testcase.farmshop.farmshop.entities.*;
-import com.ing.testcase.farmshop.farmshop.service.FarmShopService;
+import com.ing.testcase.farmshop.entities.*;
+import com.ing.testcase.farmshop.common.Constants;
+import com.ing.testcase.farmshop.common.OutOfStockException;
+import com.ing.testcase.farmshop.service.FarmShopService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +19,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,13 +32,13 @@ public class FarmshopApplicationTests {
 	@Autowired
 	WebApplicationContext context;
 	@Autowired
-	FarmShopService farmShopService;
+    FarmShopService farmShopService;
 	@Autowired
-	Flocks flocks;
+    Flocks flocks;
 	@Autowired
-	Stock stock;
+    Stock stock;
 	@Autowired
-	Stockexist stockexist;
+    Stockexist stockexist;
 
 	Order order;
 	Customer customer;

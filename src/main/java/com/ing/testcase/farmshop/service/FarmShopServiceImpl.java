@@ -1,16 +1,17 @@
-package com.ing.testcase.farmshop.farmshop.service;
+package com.ing.testcase.farmshop.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.ing.testcase.farmshop.farmshop.FarmshopApplication;
-import com.ing.testcase.farmshop.farmshop.common.AppConfig;
-import com.ing.testcase.farmshop.farmshop.common.OutOfStockException;
-import com.ing.testcase.farmshop.farmshop.entities.Customer;
-import com.ing.testcase.farmshop.farmshop.entities.Flocks;
-import com.ing.testcase.farmshop.farmshop.entities.Stock;
-import com.ing.testcase.farmshop.farmshop.entities.Stockexist;
+import com.ing.testcase.farmshop.common.AppConfig;
+import com.ing.testcase.farmshop.FarmshopApplication;
+import com.ing.testcase.farmshop.common.CheckInputtypeException;
+import com.ing.testcase.farmshop.common.OutOfStockException;
+import com.ing.testcase.farmshop.entities.Customer;
+import com.ing.testcase.farmshop.entities.Flocks;
+import com.ing.testcase.farmshop.entities.Stock;
+import com.ing.testcase.farmshop.entities.Stockexist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,10 +77,18 @@ public class FarmShopServiceImpl implements FarmShopService {
      * @return
      * @throws OutOfStockException
      */
-    public boolean stockUpdate_Customer(Customer customer, List<Customer>  orderlist) throws OutOfStockException,NullPointerException{
-        orderlist.add(customer);
-        int milkPlaced = customer.getOrder().getMilk();
-        int woolPlaced =  customer.getOrder().getWool();
+    public boolean stockUpdate_Customer(Customer customer, List<Customer>  orderlist) throws OutOfStockException, CheckInputtypeException {
+        int milkPlaced=0;
+        int woolPlaced=0;
+       try {
+           orderlist.add(customer);
+            milkPlaced = customer.getOrder().getMilk();
+            woolPlaced = customer.getOrder().getWool();
+       }
+       catch (NullPointerException e)
+       {
+            throw new CheckInputtypeException(0,0);
+       }
         if ( milkPlaced > stock.getMilk() || woolPlaced > stock.getWools()) {
             customer.setOrder(null);
             customer.setOrderDescription("Out Of Stock");

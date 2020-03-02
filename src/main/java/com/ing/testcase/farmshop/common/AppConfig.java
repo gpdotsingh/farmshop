@@ -1,4 +1,4 @@
-package com.ing.testcase.farmshop.farmshop.common;
+package com.ing.testcase.farmshop.common;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
